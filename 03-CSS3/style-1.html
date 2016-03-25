@@ -7,19 +7,39 @@
 <style type="text/css">
 p.leading {
     font-size: 1.2em;
-    color: #008;
 }
 
 .emphasise {
     text-decoration: underline;
     font-weight: bolder;
 }
+
+div.first-section {
+    color: blue;
+    background-color: pink;
+    width: 50em;
+}
+
+div.second-section {
+    background-color: yellow;
+}
 </style>
 <body>
     <h1>Heading</h1>
 
-    <p class="leading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad minima delectus officiis ex deserunt. Reprehenderit tempora quidem quasi est officia ipsam voluptatem, magnam unde sequi impedit nesciunt dolorem, odio rerum.</p>
+    <div class="first-section">
+        <p class="leading">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Ad minima delectus officiis ex deserunt. Reprehenderit </p>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil dolorem nisi omnis non, commodi soluta possimus libero <span class="emphasise">excepturi</span> quia placeat odit facere dolores iste minus velit totam maiores ex recusandae?</p>
+        <p>tempora quidem quasi est officia ipsam voluptatem, magnam unde sequi
+        impedit nesciunt dolorem, odio rerum.</p>
+    </div>
+
+    <div class="second-section">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil
+        dolorem nisi omnis non, commodi soluta possimus libero
+        <span class="emphasise">excepturi</span> quia placeat odit facere
+        dolores iste minus velit totam maiores ex recusandae?</p>
+    </div>
 </body>
 </html>
