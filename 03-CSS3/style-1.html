@@ -17,11 +17,22 @@ p.leading {
 div.first-section {
     color: blue;
     background-color: pink;
-    width: 50em;
+    width: 40%;
+    float: left;
 }
 
 div.second-section {
     background-color: yellow;
+    width: 40%;
+    float: right;
+}
+
+h1.high {
+    color: Red;
+}
+
+.clear {
+    clear: both;
 }
 </style>
 <body>
@@ -40,6 +51,12 @@ div.second-section {
         dolorem nisi omnis non, commodi soluta possimus libero
         <span class="emphasise">excepturi</span> quia placeat odit facere
         dolores iste minus velit totam maiores ex recusandae?</p>
+
+        <h1 class="high">CSS is Cool</h1>
+    </div>
+
+    <div class="clear">
+        <p>This paragraph is unfloated, it's going below.</p>
     </div>
 </body>
 </html>
