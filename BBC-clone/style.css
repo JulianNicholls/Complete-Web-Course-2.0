@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: white;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.container {
+    width: 970px;
+    margin: 0 auto;
+    border-left: 1px solid yellow;
+    border-right: 1px solid yellow;
+}
+
+#top-menu {
+    height: 42px;
+}
+
+#top-menu img {
+    float: left;
+    padding: 10px 10px 10px 0;
+    border-right: 1px solid #777;
+}
+
+#top-menu ul {
+    float: left;
+    list-style: none;
+    font-size: 85%;
+}
+
+#top-menu ul li {
+    float: left;
+    padding: 13px 13px 15px 13px;
+    border-right: 1px solid #777;
+}
+
+#top-menu ul li#sign-in {
+    padding-left: 42px;
+    padding-right: 80px;
+}
+
+#top-menu form {
+    float: left;
+}
+
+#top-menu form input {
+    font-size: 16px;
+    background: #eee;
+    padding: 3px;
+    margin: 6px 0 0 12px;
+    width: 13em;
+}
+
+header {
+    clear: both;
+    background: #bb1919;
+    height: 90px;
+    color: white;
+}
+
+header img {
+    float: left;
+    margin: 12px 0 0 0;
+}
+
+header #find {
+    color: white;
+    float: right;
+    margin: 12px 0 8px 0;
+    padding: 8px 32px 8px 16px;
+    border: 1px solid #a95014;
+}
+
+header #header-menu {
+    clear: both;
+    background: #a91717;
+    height: 34px;
+    margin: 0;
+    padding: 0;
+}
+
+header #header-menu ul {
+    margin-top: 4px;
+    float: left;
+    list-style: none;
+    font-size: 85%;
+}
+
+header #header-menu ul li {
+    float: left;
+    margin-top: 6px;
+    padding: 1px 12px;
+    border-right: 1px solid #a95014;
+}
+
+h3 {
+    display: inline-block;
+    padding: 6px 0 3px;
+    font-size: 120%;
+    font-weight: normal;
+    border-bottom: 3px solid #bb1919;
+}
