@@ -96,10 +96,63 @@ header #header-menu ul li {
     border-right: 1px solid #a95014;
 }
 
+.header {
+    margin-bottom: 20px;
+}
+
 h3 {
     display: inline-block;
     padding: 6px 0 3px;
     font-size: 120%;
     font-weight: normal;
     border-bottom: 3px solid #bb1919;
+}
+
+.left-column {
+    float: left;
+    width: 655px;
+    margin-top: 20px;
+    padding: 0 10px 0 0;
+    font-size: 15px;
+}
+
+.left-column article h2 {
+    margin-bottom: 10px;
+}
+
+.left-column article img {
+    float: right;
+    margin-left: 10px;
+    width: 60%;
+}
+
+.right-column {
+    width: 290px;
+    float: left;
+    border-left: 1px solid #777;
+    padding: 0 0 0 10px;
+    margin: 0;
+}
+
+.right-column article {
+    min-height: 60px;
+    clear: both;
+    margin-bottom: 10px;
+}
+
+.right-column article img {
+    float: left;
+    margin-right: 5px;
+    width: 35%;
+}
+
+.time {
+    font-size: 13px;
+    color: #777;
+    text-align: center;
+}
+
+.section {
+    font-size: 13px;
+    color: #a91717;
 }
