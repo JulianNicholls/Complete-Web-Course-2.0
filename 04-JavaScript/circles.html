@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Disappearing circles</title>
+</head>
+<style>
+.circle {
+    float: left;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin: 20px;
+}
+
+#red {
+    background-color: #a00;
+}
+
+#green {
+    background-color: #0a0;
+}
+
+#blue {
+    background-color: #00a;
+}
+
+#yellow {
+    background-color: #ff0;
+}
+</style>
+<body>
+    <div class="circle" id="red"></div>
+    <div class="circle" id="blue"></div>
+    <div class="circle" id="green"></div>
+    <div class="circle" id="yellow"></div>
+
+<script>
+    function hide() {
+        this.style.display = 'none';
+    }
+
+    var circles = document.getElementsByClassName("circle")
+
+    for(var i = 0; i < circles.length; ++i) {
+        circles[i].onclick = hide;
+    }
+
+    var array = [];
+
+    array[0] = "Sunny";
+    array[1] = "Windy";
+    array.push('finally');
+
+    var spliced = array.splice(1, 1, "Rainy", "Cloudy");
+
+    console.log(array);
+    console.log(spliced);
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript first</title>
+</head>
+<body>
+  <p id="text1">Paragraph to be changed</p>
+
+  <button id="first">Change text</button>
+  <button id="second">Add text</button>
+
+  <p id="styleme">Style this paragraph</p>
+
+  <button id="third">Make it stylish</button>
+  <button id="fourth">Hide it</button>
+
+<script>
+document.getElementById("first").onclick = function () {
+  document.getElementById("text1").innerHTML = "Changed!";
+}
+
+document.getElementById("second").onclick = function () {
+  var cur = document.getElementById("text1").innerHTML;
+
+  document.getElementById("text1").innerHTML = cur + ' Added.';
+}
+
+document.getElementById("third").onclick = function () {
+  var para = document.getElementById("styleme").style;
+
+  para.color = "Red";
+  para.fontSize = "30px";
+}
+
+document.getElementById("fourth").onclick = function () {
+  var para = document.getElementById("styleme").style;
+
+  para.display = 'none';
+}
+
+function log() {
+  console.clear();
+  console.assert(2 + 2 == 5, "assert 2 plus 2 equals 5");  // Only outpts if assertion fails
+  console.info("INFO: Inside onclick handler");
+  console.log("LOG: Clicked!");
+  alert('Hi there');
+  console.log("Alerted %f times", 1.23);  // no %.nf formatting in Chrome
+  console.debug("DEBUG: Alerted");         // Alias for .log(), although a different colour potentially
+  console.error("ERROR: Done wrong");
+  console.warn("WARN: Approaching wild animals!");
+}
+</script>
+</body>
+</html>
