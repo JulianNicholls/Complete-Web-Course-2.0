@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery content</title>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+</head>
+<style>
+.target {
+  width: 180px;
+  height: 180px;
+  float: left;
+  margin: 10px;
+  text-align: center;
+  line-height: 180px;
+  color: white;
+}
+
+.square {
+  border-radius: 5px;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.red {
+  background-color: #a00;
+}
+
+.green {
+  background-color: #0a0;
+}
+
+iframe {
+  clear: both;
+  width: 800px;
+  height: 400px;
+}
+
+</style>
+<body>
+  <h1>Circle Square</h1>
+
+  <iframe src="http://www.bbc.co.uk/news" frameborder="0"></iframe>
+
+  <div class="target red square"></div>
+  <div class="target green circle"></div>
+  <div class="target red square"></div>
+
+<script>
+  $(".circle").hover(function () {
+    this.innerHTML = "<p>Circle</p>";
+
+    $("iframe").attr("src", "http://www.ecowebhosting.co.uk");
+  });
+
+  $(".square").click(function () {
+    this.innerHTML = "<p>Square</p>";
+  })
+</script>
+</body>
+</html>
