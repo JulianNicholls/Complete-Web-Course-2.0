@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery animations</title>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+</head>
+<style>
+.target {
+  width: 180px;
+  height: 180px;
+  float: left;
+  margin: 10px;
+}
+
+.square {
+  border-radius: 5px;
+}
+
+.circle {
+  border-radius: 90px;
+}
+
+.red {
+  background-color: #a00;
+}
+
+.green {
+  background-color: #0a0;
+}
+
+</style>
+<body>
+  <h1>Circle Style</h1>
+
+  <div class="target red square"></div>
+  <div class="target green circle"></div>
+  <div id="second" class="target red square"></div>
+
+<script>
+  $(".circle").click(function () {
+    var $this = $(this);
+
+    if($this.css("borderRadius") == "90px") {
+      $this.animate({
+        width: "400px",
+        borderRadius: "1px",
+        marginLeft: "10px",
+        marginRight: "10px"
+      }, 1500);
+    }
+    else {
+      $this.animate({
+        width: "180px",
+        borderRadius: "90px",
+        marginLeft: "120px",
+        marginRight: "120px"
+      }, 500, function () {
+        $this.animate({
+          marginLeft: "10px",
+          marginRight: "10px"
+        }, 500);
+      });
+    }
+  })
+</script>
+</body>
+</html>
