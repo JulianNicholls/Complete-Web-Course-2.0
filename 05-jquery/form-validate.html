@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Validation</title>
+    <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+</head>
+<style>
+body {
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+h1 {
+    font-family: 'Fjalla One', sans-serif;
+    text-align: center;
+}
+
+#container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+label {
+  display: inline-block;
+  width: 10em;
+}
+
+input {
+  margin-top: 0.25em;
+  font-size: 1em;
+  padding: 3px 5px;
+  border-radius: 3px;
+  border: 1px solid gray;
+}
+
+#submit {
+  background: #008;
+  color: white;
+  padding: 5px 8px;
+  margin-left: 10em;
+  margin-top: 1em;
+}
+
+#errors {
+  display: none;
+  background: #fcc;
+  color: #800;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+</style>
+<body>
+  <div id="container">
+    <h1>Form Validation</h1>
+
+    <div id="errors">
+
+    </div>
+
+    <form action="#" id="validate-test">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Email Address"><br>
+
+      <label for="telephone">Telephone</label>
+      <input type="tel" name="telephone" id="telephone" placeholder="Telephone Number"><br>
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" placeholder="Password"><br>
+
+      <label for="cpassword">Confirm Password</label>
+      <input type="password" name="cpassword" id="cpassword" placeholder="Password"><br>
+
+      <input type="submit" value="Sign up" id="submit">
+    </form>
+  </div>
+
+<script>
+  $(function () {
+    $("#submit").click(function () {
+      console.log("Checking");
+
+      var errors_text = '',
+          email       = $("#email").val(),
+          telephone   = $("#telephone").val(),
+          pass        = $("#password").val(),
+          cpass       = $("#cpassword").val();
+
+      if(email === '' || telephone === '' || pass === '' || cpass == '') {
+        errors_text = "All the fields must be filled in.<br>"
+      }
+
+      // No real need to validate the email because HTML5 does it nicely
+      if(email !== '' && !emailOK(email)) {
+        errors_text += "The email address may be invalid.<br>";
+      }
+
+      if(telephone !== '' && !telOK(telephone)) {
+        errors_text += "The telephone number can only contain digits and spaces.<br>";
+      }
+
+      if(pass !== '' && pass !== cpass) {
+        errors_text += "The entered passwords don't match.<br>";
+      }
+
+      if(errors !== '') {
+        $errors = $("#errors");
+
+        $errors.html(errors_text);
+        $errors.slideDown();
+
+        return false;
+      }
+    });
+  });
+
+  // Validation of email with a regex is fraught with problem. I took this one from
+  // http://emailregex.com/
+  function emailOK(entered) {
+    var EMAIL_REGEX = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
+
+    return EMAIL_REGEX.test(entered)
+  }
+
+  function telOK(entered) {
+    return !/[^0-9 ]/.test(entered);
+  }
+</script>
+</body>
+</html>
