@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery UI</title>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/blitzer/jquery-ui.css">
+</head>
+<style>
+.box {
+  height: 600px;
+  border: 2px solid #777;
+  background-color: #eee;
+}
+
+.target {
+  width: 180px;
+  height: 180px;
+  float: left;
+  margin: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.square {
+  border-radius: 5px;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.red {
+  background-color: #a00;
+}
+
+.green {
+  background-color: #0a0;
+}
+
+.orange {
+  background-color: #ea0;
+}
+</style>
+<body>
+  <h1>jQuery UI</h1>
+
+<div class="box">
+  <div class="target red square">Drag &searr;</div>
+  <div class="target green circle">Drag &rarr;</div>
+  <div class="target orange square">Drag &darr;</div>
+</div>
+
+<script>
+  $(".circle").click(function () {
+    console.log("Circle");
+  });
+
+  $(".square").click(function () {
+    console.log("Square");
+  })
+
+  $(".red").resizable({ containment: 'parent', grid: 20});
+  $(".orange").draggable({ axis: 'y', containment: 'parent' });
+  $(".circle").draggable({ axis: 'x', containment: '.box' });
+</script>
+</body>
+</html>
