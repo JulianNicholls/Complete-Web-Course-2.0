@@ -9,9 +9,10 @@
 </head>
 <style>
 .box {
-  height: 600px;
+  height: 400px;
   border: 2px solid #777;
   background-color: #eee;
+  padding: 10px;
 }
 
 .target {
@@ -49,12 +50,17 @@
   <h1>jQuery UI</h1>
 
 <div class="box">
-  <div class="target red square">Drag &searr;</div>
-  <div class="target green circle">Drag &rarr;</div>
+  <div class="target red square">Resize &searr;</div>
+  <div class="target green circle">Drag in here &rarr;</div>
   <div class="target orange square">Drag &darr;</div>
 </div>
 
+<div class="box destination">
+  <p>Drop here</p>
+</div>
+
 <script>
+$(function() {
   $(".circle").click(function () {
     console.log("Circle");
   });
@@ -64,8 +70,17 @@
   })
 
   $(".red").resizable({ containment: 'parent', grid: 20});
-  $(".orange").draggable({ axis: 'y', containment: 'parent' });
-  $(".circle").draggable({ axis: 'x', containment: '.box' });
+  $(".circle").draggable({ axis: 'x', containment: 'parent' });
+  $(".orange").draggable();
+
+  $(".destination").droppable({
+    drop: function(event, ui) {
+      $(this).
+        addClass('ui-state-highlight').
+        find('p').html('Dropped');
+    }
+  });
+});
 </script>
 </body>
 </html>
