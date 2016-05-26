@@ -8,8 +8,13 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/blitzer/jquery-ui.css">
 </head>
 <style>
+body {
+  font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+}
 .box {
   height: 400px;
+  width: 500px;
+  float: left;
   border: 2px solid #777;
   background-color: #eee;
   padding: 10px;
@@ -45,6 +50,10 @@
 .orange {
   background-color: #ea0;
 }
+
+.sortable {
+  list-style-type: none;
+}
 </style>
 <body>
   <h1>jQuery UI</h1>
@@ -59,6 +68,36 @@
   <p>Drop here</p>
 </div>
 
+<div class="box accordion">
+  <h3>Section 1</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat ullam culpa consequatur
+    facilis aut dolor, magni illum nam numquam reiciendis accusamus sint nostrum esse nobis.
+    Animi dolorum adipisci eos iusto.</p>
+  <h3>Section 2</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat ullam culpa consequatur
+    facilis aut dolor, magni illum nam numquam reiciendis accusamus sint nostrum esse nobis.
+    Animi dolorum adipisci eos iusto.</p>
+  <h3>Section 3</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat ullam culpa consequatur
+    facilis aut dolor, magni illum nam numquam reiciendis accusamus sint nostrum esse nobis.
+    Animi dolorum adipisci eos iusto.</p>
+  <h3>Section 4</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat ullam culpa consequatur
+    facilis aut dolor, magni illum nam numquam reiciendis accusamus sint nostrum esse nobis.
+    Animi dolorum adipisci eos iusto.</p>
+</div>
+
+<div class="box list">
+  <ul class="sortable">
+    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+  </ul>
+</div>
 <script>
 $(function() {
   $(".circle").click(function () {
@@ -80,6 +119,10 @@ $(function() {
         find('p').html('Dropped');
     }
   });
+
+  $('.accordion').accordion();
+
+  $(".sortable").sortable();
 });
 </script>
 </body>
