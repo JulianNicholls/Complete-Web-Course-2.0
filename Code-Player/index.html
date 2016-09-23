@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Code Player</title>
+  <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type='text/css'>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="header">
+    <div id="logo">
+      CodePlayer
+    </div>
+    <div id="button-container">
+      <div id="t-html" class="toggle-button active">HTML</div>
+      <div id="t-css" class="toggle-button">CSS</div>
+      <div id="t-js" class="toggle-button">JavaScript</div>
+      <div id="t-output" class="toggle-button active">Output</div>
+    </div>
+  </div>
+
+  <div id="panel-container">
+    <textarea class="panel" id="html-panel">Hello World</textarea>
+
+    <iframe class="panel" id="output-panel">HTML</iframe>
+  </div>    <!-- panel-container -->
+
+
+  <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+          crossorigin="anonymous"></script>
+
+  <script src="codeplayer.js"></script>
+</body>
+</html>
