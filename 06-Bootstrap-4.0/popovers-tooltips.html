@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type='text/css'>
+
+    <title>Bootstrap Popovers and Tooltips</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="m-b-1">Bootstrap Popovers and Tooltips</h1>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae voluptatum ab excepturi
+        et ad ex labore culpa incidunt quidem commodi perferendis repellendus, nostrum quae cum eum.
+        Omnis sint, fugiat fugit.</p>
+
+      <p>Ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae voluptatum ab excepturi
+        et ad ex labore culpa incidunt quidem commodi perferendis repellendus, nostrum quae cum eum.
+        Omnis sint, fugiat fugit.</p>
+
+      <p>Consectetur adipisicing elit. Repudiandae voluptatum ab excepturi
+        et ad ex labore culpa incidunt quidem commodi perferendis repellendus, nostrum quae cum eum.
+        Omnis sint, fugiat fugit.</p>
+
+      <button type="button" class="btn btn-lg btn-danger"
+              data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+        Popover Right
+      </button>
+
+      <button type="button" class="btn btn-lg btn-danger"
+              data-toggle="popover" title="Popover title" data-placement="bottom" data-content="And here's some amazing content. It's very engaging. Right?">
+        Popover Bottom
+      </button>
+
+      <p class="m-t-1">Tooltips</p>
+
+      <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+        Tooltip on top
+      </button>
+      <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Tooltip on right">
+        Tooltip on right
+      </button>
+
+      <button type="button" id="fancy" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> with <b>HTML</b>">
+        Tooltip with HTML
+      </button>
+    </div>
+
+    <!-- jQuery first, then Tether (needed for popovers and tooltips), then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <script>
+// Popovers and Tooltips need to be explicitly enabled
+$(function () {
+  $('[data-toggle="popover"]').popover();
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
+$("#fancy").on("hidden.bs.tooltip", (event) => {
+  console.log("Fancy tooltip went away");
+});
+    </script>
+  </body>
+</html>
