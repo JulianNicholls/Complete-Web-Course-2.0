@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type='text/css'>
+    <script src="https://use.fontawesome.com/3d3a1ab939.js"></script>
+    <title>Schnell App</title>
+  </head>
+  <style>
+body {
+  padding-top: 70px;
+  position: relative;    /* Required for Scrollspy */
+}
+
+#top {
+  background: url('seascape.jpg');
+  text-align: center;
+}
+
+#list-email {
+  width: 300px;
+}
+
+#about {
+  padding: 2em 0 4em 0;
+}
+
+#download {
+  background: #90CAF9;
+  text-align: center;
+  padding: 2em 0;
+  height: 800px;
+}
+  </style>
+
+  <body data-spy="scroll" data-target="#navbar" data-offset="70">
+    <nav id="navbar" class="navbar navbar-fixed-top navbar-light bg-faded">
+      <a class="navbar-brand" href="#">Schnell</a>
+      <ul class="nav navbar-nav" role="tablist">
+        <li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#download">Download</a></li>
+      </ul>
+      <form class="form-inline float-xs-right">
+        <input type="email" class="form-control" id="login-email" placeholder="Email address">
+        <input type="password" class="form-control" id="login-password" placeholder="Password">
+        <button class="btn btn-outline-success" type="submit">Log in</button>
+      </form>
+    </nav>
+
+    <div id="top" class="py-3 jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-2">Schnell</h1>
+        <p class="lead">All the drivers hold an FIA class A racing licence. Download the app for a quicker taxi experience.</p>
+        <hr class="my-2">
+        <p class="lead">Want to know more? Join our mailing list.</p>
+        <form class="form-inline" action="">
+          <div class="form-group">
+              <label class="sr-only" for="email">Email Address</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                <input type="email" class="form-control" id="list-email" placeholder="Your email address">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign up</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="about">
+        <h1 class="mb-3 display-4 text-xs-center">Schnell</h1>
+        <p class="lead mb-3">
+          Schnell is a new concept in taxis. Your driver will be a racing driver with many years experience.
+          Most have come from Touring Cars, an entirely non-contact formula.
+        </p>
+
+        <div class="card-deck-wrapper">
+          <div class="card-deck">
+            <div class="card">
+              <img class="card-img-top img-fluid" src="f1car.jpg" alt="Card image cap">
+              <div class="card-block">
+                <h4 class="card-title"><i class="fa fa-fighter-jet" aria-hidden="true"></i> Speed</h4>
+                <p class="card-text">You'll get to your destination as fast as humanly possible.</p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top img-fluid" src="f1car.jpg" alt="Card image cap">
+              <div class="card-block">
+                <h4 class="card-title"><i class="fa fa-university" aria-hidden="true"></i> Safety</h4>
+                <p class="card-text">Of course, a Touring Car driver would never be involved in any sort of accident.</p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top img-fluid" src="f1car.jpg" alt="Card image cap">
+              <div class="card-block">
+                <h4 class="card-title"><i class="fa fa-money" aria-hidden="true"></i> Low price</h4>
+                <p class="card-text">Where else can you experience a racing driver on the road for less?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="download">
+      <h1 class="display-3 mb-2">Download Now!</h1>
+      <p class="lead mb-1">Download now for your new experience.</p>
+      <a href="#"><img src="app-store.png" alt=""></a>
+      <a href="#"><img src="google-play.png" alt=""></a>
+      <a href="#"><img src="windows.png" alt=""></a>
+    </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  </body>
+</html>
