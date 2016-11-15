@@ -1,19 +1,33 @@
 <?php
   session_start();
 
+  if (isset($_GET['logout'])) {
+    unset($_SESSION['id']);
+    setcookie('id', FALSE, time() - 7200);
+  }
+  else {
+    if (isset($_COOKIE['id'])) {
+      $_SESSION['id'] = $_COOKIE['id'];
+    }
+
+    if (isset($_SESSION['id'])) {
+      header("Location: diary-edit.php");
+    }
+  }
+
   $db_error  = '';
   $error     = '';
-  $message   = '';
 
-  if (isset($_POST['signup-email']) || isset($_POST['login-email'])) {
+  if (isset($_POST['signup']) || isset($_POST['login'])) {
     $conn       = mysqli_connect('localhost', 'root', 'root', 'web20', 8889);
     $db_error   = $conn ? '' : '<strong>Error connecting to database</strong>: ' . mysqli_connect_errno() . ', ' . mysqli_connect_error();
 
-    $signup_email   = mysqli_real_escape_string($conn, $_POST['signup-email']);
-    $login_email    = mysqli_real_escape_string($conn, $_POST['login-email']);
+    $stay_logged_in = isset($_POST['signup-stay']) || isset($_POST['login-stay']);
 
-    if (isset($_POST['signup'])) {
-      if ($signup_email !== '' && $signup_password !== '') {
+    if ($conn && isset($_POST['signup'])) {
+      $signup_email = mysqli_real_escape_string($conn, $_POST['signup-email']);
+
+      if ($signup_email !== '' && $_POST['signup-password'] !== '') {
         $signup_password = mysqli_real_escape_string($conn, password_hash($_POST['signup-password'], PASSWORD_DEFAULT));
 
         $query  = "SELECT `id` FROM `users` WHERE `email`='$signup_email'";
@@ -25,10 +39,12 @@
         else {
           $query  = "INSERT INTO `users` (`email`, `password`) VALUES('$signup_email', '$signup_password')";
           if (mysqli_query($conn, $query)) {
-            $message = "You have been signed up successfully";
-
-            $_SESSION['email'] = $signup_email;
-//            header('Location: session.php');
+            $id = mysqli_insert_id($conn);
+            $_SESSION['id'] = $id;
+            if ($stay_logged_in) {
+              setcookie('id', $id, time() + 7 * 24 * 60 * 60);
+            }
+            header('Location: diary-edit.php');
           }
           else {
             $error = "There was a problem signing you up: " . mysqli_connect_errno() . ', ' . mysqli_connect_error();
@@ -40,8 +56,10 @@
       }
     }
 
-    if (isset($_POST['login'])) {
-      if ($login_email !== '' && $login_password !== '') {
+    if ($conn && isset($_POST['login'])) {
+      $login_email = mysqli_real_escape_string($conn, $_POST['login-email']);
+
+      if ($login_email !== '' && $_POST['login-password'] !== '') {
         $login_password = $_POST['login-password'];
 
         $query  = "SELECT `id`, `password` FROM `users` WHERE `email`='$login_email'";
@@ -51,9 +69,14 @@
           $row = mysqli_fetch_assoc($result);
 
           if (password_verify($login_password, $row['password'])) {
-            $_SESSION['email'] = $login_email;
-//            header('Location: session.php');
-            $message = 'Logged in successfully';
+            $id = $row['id'];
+            $_SESSION['id'] = $id;
+//            print_r($_POST);
+            if ($stay_logged_in) {
+              setcookie('id', $id, time() + 7 * 24 * 60 * 60);
+//              echo 'Written COOKIE';
+            }
+            header('Location: diary-edit.php');
           }
           else {
             $error = "That password has not been recognised";
@@ -86,13 +109,18 @@
     <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
     <script src="https://use.fontawesome.com/3d3a1ab939.js"></script>
 
-    <title>Secret Diary</title>
+    <title>Secret Diary - Login</title>
   </head>
 
   <style>
- h1, h2, h3, h4, h5, h6 {
+body {
+  background: url(images/bay-area.png) no-repeat top center;
+  background-size: cover;
+}
+
+h1, h2, h3, h4, h5, h6 {
    font-family: 'Fjalla One';
- }
+}
   </style>
 
   <body>
@@ -102,7 +130,7 @@
       </div>
     <?php endif; ?>
 
-    <h1 class="my-1 text-sm-center">Secret Diary</h1>
+    <h1 class="my-1 text-sm-center">Secret Diary - Login</h1>
 
     <div class="container">
       <?php if ($error !== '') : ?>
@@ -111,20 +139,20 @@
         </div>
       <?php endif; ?>
 
-      <?php if ($message !== '') : ?>
-        <div class="alert alert-success" role="alert">
-          <?php echo $message; ?>
-        </div>
-      <?php endif; ?>
-
       <form class="form-inline mt-1" method="post">
         <div class="form-group">
           <label for="signup-email">Email</label>
-          <input type="text" class="form-control" id="signup-email" name="signup-email" placeholder="Email Address">
+          <input type="email" class="form-control" id="signup-email" name="signup-email" placeholder="Email Address" value="<?php if (isset($signup_email)) echo $signup_email; ?>">
         </div>
         <div class="form-group">
           <label for="signup-password">Password</label>
           <input type="password" class="form-control" id="signup-password" name="signup-password" placeholder="Password">
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" id="signup-stay" name="signup-stay" class="form-check-input">
+            Keep me logged in
+          </label>
         </div>
         <button type="submit" id="signup" name="signup" class="btn btn-primary">Sign Up</button>
       </form>
@@ -132,11 +160,17 @@
       <form class="form-inline mt-1" method="post">
         <div class="form-group">
           <label for="login-email">Email</label>
-          <input type="text" class="form-control" id="login-email" name="login-email" placeholder="Email Address">
+          <input type="email" class="form-control" id="login-email" name="login-email" placeholder="Email Address" value="<?php if (isset($login_email)) echo $login_email; ?>">
         </div>
         <div class="form-group">
           <label for="login-password">Password</label>
           <input type="password" class="form-control" id="login-password" name="login-password" placeholder="Password">
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" id="login-stay" name="login-stay" class="form-check-input">
+            Keep me logged in
+          </label>
         </div>
         <button type="submit" id="login" name="login" class="btn btn-primary">Log in</button>
       </form>
