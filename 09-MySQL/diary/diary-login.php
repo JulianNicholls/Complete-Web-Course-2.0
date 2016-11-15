@@ -121,6 +121,10 @@ body {
 h1, h2, h3, h4, h5, h6 {
    font-family: 'Fjalla One';
 }
+
+#login-form {
+  display: none;
+}
   </style>
 
   <body>
@@ -130,7 +134,7 @@ h1, h2, h3, h4, h5, h6 {
       </div>
     <?php endif; ?>
 
-    <h1 class="my-1 text-sm-center">Secret Diary - Login</h1>
+    <h1 class="my-1 display-4 text-sm-center">Secret Diary - Login</h1>
 
     <div class="container">
       <?php if ($error !== '') : ?>
@@ -139,41 +143,45 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       <?php endif; ?>
 
-      <form class="form-inline mt-1" method="post">
-        <div class="form-group">
-          <label for="signup-email">Email</label>
-          <input type="email" class="form-control" id="signup-email" name="signup-email" placeholder="Email Address" value="<?php if (isset($signup_email)) echo $signup_email; ?>">
-        </div>
-        <div class="form-group">
-          <label for="signup-password">Password</label>
-          <input type="password" class="form-control" id="signup-password" name="signup-password" placeholder="Password">
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" id="signup-stay" name="signup-stay" class="form-check-input">
-            Keep me logged in
-          </label>
-        </div>
-        <button type="submit" id="signup" name="signup" class="btn btn-primary">Sign Up</button>
-      </form>
+      <div class="card card-block">
+        <form id="signup-form" class="my-1" method="post">
+          <div class="form-group">
+            <label class="sr-only" for="signup-email">Email</label>
+            <input type="email" class="form-control" id="signup-email" name="signup-email" placeholder="Email Address" value="<?php if (isset($signup_email)) echo $signup_email; ?>">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="signup-password">Password</label>
+            <input type="password" class="form-control" id="signup-password" name="signup-password" placeholder="Password">
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" id="signup-stay" name="signup-stay" class="form-check-input">
+              Keep me logged in
+            </label>
+          </div>
+          <button type="submit" id="signup" name="signup" class="btn btn-primary">Sign Up</button>
+        </form>
 
-      <form class="form-inline mt-1" method="post">
-        <div class="form-group">
-          <label for="login-email">Email</label>
-          <input type="email" class="form-control" id="login-email" name="login-email" placeholder="Email Address" value="<?php if (isset($login_email)) echo $login_email; ?>">
-        </div>
-        <div class="form-group">
-          <label for="login-password">Password</label>
-          <input type="password" class="form-control" id="login-password" name="login-password" placeholder="Password">
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" id="login-stay" name="login-stay" class="form-check-input">
-            Keep me logged in
-          </label>
-        </div>
-        <button type="submit" id="login" name="login" class="btn btn-primary">Log in</button>
-      </form>
+        <form id="login-form" class="my-1" method="post">
+          <div class="form-group">
+            <label class="sr-only" for="login-email">Email</label>
+            <input type="email" class="form-control" id="login-email" name="login-email" placeholder="Email Address" value="<?php if (isset($login_email)) echo $login_email; ?>">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="login-password">Password</label>
+            <input type="password" class="form-control" id="login-password" name="login-password" placeholder="Password">
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" id="login-stay" name="login-stay" class="form-check-input">
+              Keep me logged in
+            </label>
+          </div>
+          <button type="submit" id="login" name="login" class="btn btn-primary">Log in</button>
+        </form>
+
+        <span id="flip-text">Already have an account?</span> <a id="flip-forms" href="#">Log in</a>
+      </div>
     </div>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
@@ -182,5 +190,31 @@ h1, h2, h3, h4, h5, h6 {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
             integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <script>
+$("#flip-forms").on('click', evt => {
+  const $login_form  = $("#login-form");
+  const $signup_form = $("#signup-form");
+  const $flip_text   = $("#flip-text");
+  const $flip_forms  = $("#flip-forms");
+
+  if($signup_form.is(':visible')) {
+    $signup_form.fadeOut(() => {
+      $login_form.fadeIn();
+    });
+    $flip_text.html('Need an account?')
+    $flip_forms.text('Sign up')
+  }
+  else {
+    $login_form.fadeOut(() => {
+      $signup_form.fadeIn();
+    });
+    $flip_text.html('Already have an account?')
+    $flip_forms.text('Log in')
+  }
+
+  return false;
+});
+    </script>
   </body>
 </html>

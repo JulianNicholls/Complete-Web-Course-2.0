@@ -40,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
   </style>
 
   <body>
-    <h1 class="my-1 text-sm-center">Edit Diary</h1>
+    <h1 class="my-1 display-4 text-sm-center">Edit Diary</h1>
 
     <div class="container">
       <p>
