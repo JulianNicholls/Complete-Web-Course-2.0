@@ -33,9 +33,13 @@
 ?>
 
   <body>
+    <div id="header">
+      <h2>Secret Diary</h2>
+      <a id="logout" class="btn btn-success" href="diary-login.php?logout=1">Log out</a>
+    </div>
+
     <div class="container">
       <h1 class="my-1 display-4 text-sm-center">Edit Diary</h1>
-      <a id="logout" class="btn btn-success" href="diary-login.php?logout=1">Log out</a>
 
       <form action="post">
         <div class="form-group">
