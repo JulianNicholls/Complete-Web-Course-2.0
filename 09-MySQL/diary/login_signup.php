@@ -1,4 +1,6 @@
 <?php
+require_once('db_connect.php');
+
 if (isset($_GET['logout'])) {
   unset($_SESSION['id']);
   setcookie('id', FALSE, time() - 7200);
@@ -17,8 +19,7 @@ $db_error  = '';
 $error     = '';
 
 if (isset($_POST['signup']) || isset($_POST['login'])) {
-  $conn       = mysqli_connect('localhost', 'root', 'root', 'web20', 8889);
-  $db_error   = $conn ? '' : '<strong>Error connecting to database</strong>: ' . mysqli_connect_errno() . ', ' . mysqli_connect_error();
+  list($conn, $db_error) = db_connect();
 
   $stay_logged_in = isset($_POST['signup-stay']) || isset($_POST['login-stay']);
 
