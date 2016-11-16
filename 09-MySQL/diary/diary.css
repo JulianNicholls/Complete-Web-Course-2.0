@@ -1,0 +1,17 @@
+body {
+  background: url(../images/books.png) no-repeat top center;
+  background-size: cover;
+}
+
+h1, h2, h3, h4, h5, h6 {
+   font-family: 'Fjalla One';
+}
+
+h1, p.lead {
+  color: gold;
+  text-shadow: 1px 1px 1px darkgoldenrod;
+}
+
+#login-form {
+  display: none;
+}
