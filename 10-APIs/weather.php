@@ -24,32 +24,53 @@ $DIRECTIONS = array(
 $result = '';
 
 if (isset($_GET['location'])) :
-  $location      = $_GET['location'];
-  $url           = 'http://api.openweathermap.org/data/2.5/weather?q=' . urlencode($location) . '&appid=7d57c695d87b3573619384ec0dd6af50&units=metric';
+  $location  = $_GET['location'];
+  $url       = 'http://api.openweathermap.org/data/2.5/weather?q=' . urlencode($location) . '&appid=7d57c695d87b3573619384ec0dd6af50&units=metric';
 
-  $result = "<h1 class=\"text-sm-center my-1\">$location</h1>";
+  $result    = "<h1 class=\"text-sm-center my-1\">$location</h1>";
 
-  $raw_data = @file_get_contents($url);
+  $raw_data  = @file_get_contents($url);
 
   if ($raw_data !== FALSE) {
     $forecast = json_decode($raw_data, true);
 
     $result = "<h1 class=\"text-sm-center my-1\">{$forecast['name']}</h1>";
 
-    $direction = $forecast['wind']['deg'];
-    $wind      = " ($direction&deg;)";
+    $wind = '';
 
-    foreach($DIRECTIONS as $dir) {
-      if ($direction >= $dir[0] && $direction < $dir[1]) {
-        $wind = $dir[2] . $wind;
-        break;
+    if (isset($forecast['wind'])) {
+      if (isset($forecast['wind']['deg'])) {
+        $direction = $forecast['wind']['deg'];
+        $wind      = " ($direction&deg;)";
+
+        foreach($DIRECTIONS as $dir) {
+          if ($direction >= $dir[0] && $direction < $dir[1]) {
+            $wind = $dir[2] . $wind;
+            break;
+          }
+        }
+      }
+
+      if (isset($forecast['wind']['speed'])) {
+        // 2.23704 = 3.6 * 0.6214 => ms-1 -> kmh-1 -> mph
+        $speed = round($forecast['wind']['speed'] * 2.23704, 1);
+
+        if ($wind === '') {
+          $wind = "$speed mph";
+        }
+        else {
+          $wind .= " at $speed mph";
+        }
       }
     }
 
     $result .= "<p>Summary: <strong>{$forecast['weather'][0]['description']}</strong></p>";
     $result .= "<p>Temperature: <strong>{$forecast['main']['temp']}&deg;C</strong></p>";
-    // 2.23704 = 3.6 * 0.6214 => ms-1 -> kmh-1 -> mph
-    $result .= "<p>Wind: <strong>$wind at " . round($forecast['wind']['speed'] * 2.23704, 1) . ' mph</strong></p>';
+    if ($wind !== '') {
+      $result .= "<p>Wind: <strong>$wind</strong></p>";
+    }
+    $result .= '<p>Sunrise: <strong>' . strftime("%H:%M", $forecast['sys']['sunrise']) . '</strong><br>';
+    $result .= 'Sunset: <strong>' . strftime("%H:%M", $forecast['sys']['sunset']) . '</strong></p>';
   }
   else {
     $result .= "<h5 class=\"my-2 error\">No forecast found for $location.<br>Is it spelled correctly?</h5>";
