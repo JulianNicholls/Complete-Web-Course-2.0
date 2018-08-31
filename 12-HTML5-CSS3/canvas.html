@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas</title>
+</head>
+<style>
+canvas {
+  border: 1px solid grey;
+}
+</style>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 600);
+
+    gradient.addColorStop(0, 'LightCyan');
+    gradient.addColorStop(1, 'SteelBlue');
+    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 800, 600);
+
+    ctx.fillStyle = '#070';
+    ctx.fillRect(100, 100, 600, 400);
+
+    ctx.strokeStyle = '#f77';
+    ctx.lineWidth = 2;
+
+    ctx.moveTo(100, 500);
+    ctx.lineTo(700, 100);
+
+    ctx.moveTo(700, 500);
+    ctx.lineTo(100, 100);
+    ctx.stroke();     // Draw both lines
+
+    ctx.beginPath();
+    ctx.arc(400, 300, 100, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    ctx.strokeStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(500, 400, 50, Math.PI, 0);
+    ctx.stroke();
+
+    ctx.font = '20px Arial';
+    ctx.fillStyle = '#044';
+    ctx.fillText('My Canvas', 20, 580);
+  </script>
+</body>
+</html>

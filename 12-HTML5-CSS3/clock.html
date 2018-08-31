@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Clock</title>
+</head>
+<style>
+  canvas {
+    border: 1px solid grey;
+    margin: 10px;
+  }
+</style>
+
+<body>
+  <canvas id="canvas" width="600" height="600"></canvas>
+
+  <script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const gradient = ctx.createLinearGradient(0, 0, 0, 600);
+const centre = 300;
+const radius = 300;
+
+gradient.addColorStop(0, 'LightCyan');
+gradient.addColorStop(1, 'SteelBlue');
+
+ctx.fillStyle = gradient;
+ctx.fillRect(0, 0, 600, 600);
+
+setInterval(() => {
+  ctx.strokeStyle = '#000';
+  ctx.fillStyle = '#000';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.arc(centre, centre, radius, 0, 2 * Math.PI);
+  ctx.fill();
+  
+  ctx.fillStyle = '#fff';
+
+  ctx.font = '24px Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  const angle = Math.PI / 6;  // 30 degress
+
+  let posx, posy;
+
+  for (let i = 1; i <= 12; ++i) {
+    posx = centre - Math.sin(-angle * i) * radius * 0.9; 
+    posy = centre - Math.cos(-angle * i) * radius * 0.9;
+    ctx.fillText(i, posx, posy);
+  }
+
+  const time = new Date();
+  const second = time.getSeconds();
+  const minute = time.getMinutes();
+  const hour = time.getHours() % 12 + minute / 60.0;
+
+  const hrAngle = -angle * hour;
+  const minAngle = -Math.PI * minute / 30;
+  const secAngle = -Math.PI * second / 30;
+
+
+  // // Hour
+  posx = centre - Math.sin(hrAngle) * radius * 0.7;
+  posy = centre - Math.cos(hrAngle) * radius * 0.7;
+
+  ctx.lineWidth = 7;
+  ctx.strokeStyle = '#fff';
+  ctx.fillStyle = '#fff';
+  ctx.moveTo(centre, centre);
+  ctx.lineTo(posx, posy);
+  ctx.stroke();
+  
+  // // Minute
+  // posx = centre - Math.sin(minAngle) * radius * 0.8;
+  // posy = centre - Math.cos(minAngle) * radius * 0.8;
+
+  // ctx.strokeStyle = '#fc0';
+  // ctx.fillStyle = '#fc0';
+  // ctx.lineWidth = 4;
+  // ctx.moveTo(centre, centre);
+  // ctx.lineTo(posx, posy);
+  // ctx.stroke();
+
+  // // Second
+  // posx = centre - Math.sin(secAngle) * radius * 0.85;
+  // posy = centre - Math.cos(secAngle) * radius * 0.85;
+
+  // ctx.strokeStyle = '#f00';
+  // ctx.lineWidth = 2;
+  // ctx.moveTo(centre, centre);
+  // ctx.lineTo(posx, posy);
+  // ctx.stroke();
+
+  // Middle
+  ctx.beginPath();
+  ctx.arc(centre, centre, 10, 0, 2 * Math.PI);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+}, 10000);
+ </script>
+</body>
+
+</html>
