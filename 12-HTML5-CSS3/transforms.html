@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Transforms</title>
+</head>
+
+<style>
+#box {
+  align-items: center;
+  background-color: red;
+  border-radius: 10px;
+  display: flex;
+  font-family: arial, sans-serif;
+  height: 200px;
+  justify-content: center;
+  width: 200px;
+
+  transition: 500ms ease-in-out;
+}
+
+#box:hover {
+  /* transform: translate(50px, 50px) rotate(45deg) scale(1.1); */
+  /* transform: skew(5deg, 7deg); */
+  transform: rotateX(90deg);
+}
+</style>
+<body>
+  <div id="box">
+    Some text here
+  </div>  
+</body>
+</html>

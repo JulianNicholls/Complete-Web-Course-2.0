@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Layout and Calculation</title>
+</head>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#multi-column {
+  column-count: 2;
+  column-gap: 60px;
+  /* column-rule-style: solid;
+  column-rule-width: 1px;
+  column-rule-color: blue; */
+  column-rule: 2px solid blue;
+}
+
+h2 {
+  column-span: all;
+  text-align: center;
+}
+
+header {
+  background: grey;
+  color: white;
+  height: 50px;
+  width: 100%;
+}
+
+#container {
+  background-color: yellow;
+  height: calc(50vh - 50px);
+  width: 100%;
+}
+
+#flex-container {
+  align-items: center;
+  background: pink;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  width: 700px;
+  height: 200px;
+}
+
+.flex-item {
+  background-color: antiquewhite; 
+  height: 100px;
+  margin: 10px;
+  width: 100px;
+}
+</style>
+
+<body>
+  <header>Header</header>
+  <div id="container">Contained here</div>
+
+  <div id="flex-container">
+    <div class="flex-item">Item 1</div>
+    <div class="flex-item">Item 2</div>
+    <div class="flex-item">Item 3</div>
+    <div class="flex-item">Item 4</div>
+    <div class="flex-item">Item 5</div>
+    <div class="flex-item">Item 6</div>
+  </div>
+  <div id="multi-column">
+    <h2>Columns for Nerds</h2>
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed mi ac purus sollicitudin porta ut sit amet lorem.
+    Maecenas convallis rhoncus lectus, a suscipit risus egestas et. Nunc facilisis risus vel mattis interdum. Morbi
+    suscipit vulputate ligula, nec condimentum nulla convallis nec. Sed pellentesque convallis ullamcorper. Nam semper
+    ligula eget nunc tincidunt tristique. Aenean est quam, dignissim et ex eu, sodales egestas felis. Curabitur tincidunt
+    eleifend euismod. Pellentesque aliquet risus vel erat egestas, ac scelerisque quam fermentum. Sed eget nisl ut dui
+    venenatis molestie in a ligula. <br>
+
+    Maecenas iaculis tincidunt porta. Mauris lacinia, velit in convallis aliquam, erat ligula mattis dolor, eget porta
+    massa lacus nec enim. Curabitur mollis dolor ac metus ullamcorper commodo. Etiam eu viverra nisl. Aenean arcu ante,
+    malesuada vel mauris et, rutrum semper nibh. Suspendisse in diam quis nunc congue tempor vel maximus felis. Suspendisse
+    ut porttitor libero, quis auctor arcu. Fusce vitae nibh tellus. <br>
+  </div> 
+</body>
+</html>
