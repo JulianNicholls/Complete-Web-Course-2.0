@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Selectors</title>
+</head>
+<style>
+  div p {
+    font-weight: bold;
+  }
+
+  h3 ~ p {  /* Paragraphs at the same level as an h3 */
+    color: green;
+  }
+
+  h3 + p { /* Paragraph after h3 */
+    font-size: 150%;
+  }
+
+  a[target] {   /* a with a target */
+    color: red;
+  }
+
+  a[href="google.com"] {  /* to exactly google.com */
+    color: slateblue;
+  }
+
+  a[href*="google.com"] { /* contains google.com */
+    font-style: italic;
+  }
+
+  a[href ^= "google.com"] { /* starts with google.com */
+    font-weight: 900;
+  }
+
+  a[target $= "ank"] {    /* ends with ank */
+    font-weight: 900;
+  }
+
+  p:first-child {
+    background: pink;
+    padding: 10px;
+  }
+
+  p:last-child {
+    background: palegoldenrod;
+    padding: 10px;
+  }
+
+/* only-child, nth-child, nth-last-child, nth-of-type, empty, not(x), first-letter, 
+   first-line, before, after */
+
+</style>
+<body>
+  <div>
+  <h1>Level 1 Heading</h1>
+  <h3>Level 3 heading</h3>
+  <p>Paragraph text here in the first div</p>
+  <a href="#" target="_blank">Link with target</a>
+  <p>Another paragraph of text here in the first div</p>
+</div>
+
+<div>
+  <p>In another div</p>
+  <a href="google.com">Link to google without target</a>
+  <p>Second In another div</p>
+</div>
+</body>
+</html>
