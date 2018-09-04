@@ -4,7 +4,8 @@ This is my code from Rob Percival's
 [The Complete Web Developer Course 2.0](https://www.udemy.com/the-complete-web-developer-course-2).
 
 ## Progress
-Skipped parts of section 10, and all of section 11 for now. Starting section 12.
+
+Starting section 12 - Python.
 
 ## Git client
 
