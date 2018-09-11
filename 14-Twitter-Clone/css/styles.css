@@ -1,0 +1,19 @@
+html {
+  position: relative;
+  min-height: 100%
+}
+
+bosy {
+  margin-bottom: 40px;
+}
+
+.footer {
+  background: #ddd;
+  bottom: 0;
+  color: #444;
+  font-size: 86%;
+  height: 40px;
+  line-height: 40px;
+  position: absolute;
+  width: 100%;
+}
