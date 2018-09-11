@@ -42,30 +42,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-<script>
-  const toggle = document.getElementById('toggle-login');
-  const loginActive = document.getElementById('login-active');
-  const title = document.getElementById('login-modal-label');
-  const button = document.getElementById('action-button');
-
-  toggle.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    if(loginActive.value === '1') {
-      console.log('login -> signup');
-      title.textContent = "Sign up";
-      loginActive.value = "0";
-      button.textContent = "Sign up"
-      toggle.textContent = "Log in"
-    }
-    else {
-      console.log('signup -> login');
-      title.textContent = "Log in";
-      loginActive.value = "1";
-      button.textContent = "Log in"
-      toggle.textContent = "Sign up"
-    }
-  });
-</script>
+  <script src="/js/twitter.js"></script>
 </body>
 </html>

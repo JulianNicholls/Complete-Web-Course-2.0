@@ -5,7 +5,13 @@ This is my code from Rob Percival's
 
 ## Progress
 
-Starting section 12 - Python.
+Working on section 14 - Twitter Clone.
+
+## Differences from Rob Percival
+
+I have probably skipped large sections, notably the Twitter API lectures because I couldn't be bothered to wait for the apparently lengthy approval process to become a Twitter deveoper now.
+
+I am not using jQuery in the Twitter Clone, it is still loaded though, because parts of Bootstrap require it.
 
 ## Git client
 
