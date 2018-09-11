@@ -31,6 +31,7 @@ def makeMessage(guesses, reds, whites):
 
   return message
 
+
 print('Content-type: text/html')
 print()
 
