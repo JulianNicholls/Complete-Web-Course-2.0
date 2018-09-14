@@ -31,8 +31,7 @@
         </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
-        <?php if ($_SESSION['id']): echo $_SESSION['id']; ?>
-
+        <?php if ($_SESSION['id']): ?>
           <a href="/actions.php?action=logout" class="btn btn-outline-light my-2 my-sm-0">Logout</a>
         <?php else: ?>
           <button 
