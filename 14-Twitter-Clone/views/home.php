@@ -1,10 +1,12 @@
 <div class="container pt-3">
   <div class="row">
     <div class="col-md-8">
-      <h2>Recent Tweets</h2>
+      <h2 class="ml-5">Recent Tweets</h2>
       <?php displayTweets('public'); ?>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 mt-5">
+      <?php displaySearch(); ?>
+      <?php displayTweetBox(); ?> 
     </div>
   </div>
 </div>

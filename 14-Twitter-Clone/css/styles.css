@@ -22,12 +22,12 @@ bosy {
 .tweet {
   background: #ddd;
   border: 1px solid #aaa;
-  border-radius: 0.5em;
+  border-radius: 0.25em;
   padding: 0.5em;
   margin: 0.5em;
 }
 
-.user-email, .human-time {
+.tweet__email, .tweet__time {
   font-size: 85%;
   color: #555;
 }
