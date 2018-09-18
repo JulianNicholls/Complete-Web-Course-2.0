@@ -45,3 +45,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 85%;
   color: #555;
 }
+
+.toggle-follow {
+  width: 5.5em;
+}
