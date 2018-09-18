@@ -8,6 +8,10 @@
       include('views/timeline.php');
       break;
 
+    case 'personal':
+      include('views/personal.php');
+      break;
+
     default:
       include('views/home.php');
   }

@@ -19,26 +19,34 @@ function displayTweets($type) {
 
   $whereClause = '';
 
-  if ($type === 'following') {
-    $query = "SELECT * FROM `following` WHERE `follower`={$_SESSION['id']}";
-    $result = mysqli_query($link, $query);
-
-    if (mysqli_num_rows($result) > 0) {    
-      while($row = mysqli_fetch_object($result)) {
-        if ($whereClause === '') {
-          $whereClause = "WHERE `user_id` IN ({$row->following}";
-        } 
-        else {
-          $whereClause .= ", {$row->following}";
+  switch ($type) {
+    case 'following':
+      $query = "SELECT * FROM `following` WHERE `follower`={$_SESSION['id']}";
+      $result = mysqli_query($link, $query);
+    
+      if (mysqli_num_rows($result) > 0) {    
+        while($row = mysqli_fetch_object($result)) {
+          if ($whereClause === '') {
+            $whereClause = "WHERE `user_id` IN ({$row->following}";
+          } 
+          else {
+            $whereClause .= ", {$row->following}";
+          }
         }
+    
+        $whereClause .= ')';
       }
+      else {
+        $whereClause = 'WHERE 1=0';  // Always false, no follows
+      }
+      break;
 
-      $whereClause .= ')';
-    }
-    else {
-      $whereClause = 'WHERE 1=0';  // Always false, no follows
-    }
-  }
+    case 'personal':
+      $whereClause = "WHERE `user_id`={$_SESSION['id']}";
+      break;
+}
+  
+  echo "whereClause: '$whereClause'";
 
   $query = 'SELECT * FROM `tweets` ' . $whereClause . ' ORDER BY `created_at` DESC LIMIT 10';
   $result = mysqli_query($link, $query);

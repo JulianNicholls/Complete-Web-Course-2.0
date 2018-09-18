@@ -1,12 +1,23 @@
+const navItems = [...document.querySelectorAll('.nav-item')];
 const loginActive = document.getElementById('login-active');
 const title = document.getElementById('login-modal-label');
 const actionButton = document.getElementById('action-button');
 const toggleLogin = document.getElementById('toggle-login');
 
-const toggleFollows = document.querySelectorAll('.toggle-follow');
+const toggleFollows = [...document.querySelectorAll('.toggle-follow')];
 
 const newTwinge = document.getElementById('new-twinge');
 const newTwingeText = document.getElementById('new-twinge-text');
+
+// Set active on the active page
+
+navItems.forEach(item =>
+  item.addEventListener('click', e => {
+    navItems.forEach(item => item.classList.remove('active'));
+
+    e.currentTarget.classList.add('active');
+  })
+);
 
 // Switch between login and signup
 toggleLogin.addEventListener('click', e => {
@@ -59,7 +70,7 @@ actionButton.addEventListener('click', async () => {
 });
 
 // Toggle whether the logged in user is following the tweet author
-[...toggleFollows].forEach(tf => tf.addEventListener('click', toggleFollow));
+toggleFollows.forEach(tf => tf.addEventListener('click', toggleFollow));
 
 async function toggleFollow(e) {
   const { userId } = e.target.dataset;

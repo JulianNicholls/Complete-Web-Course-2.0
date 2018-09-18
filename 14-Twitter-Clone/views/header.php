@@ -9,11 +9,11 @@
     crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
-  <title>Twinge</title>
+  <title>Twinger</title>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="http://localhost/">Twinge</a>
+    <a class="navbar-brand" href="http://localhost/">Twinger</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -24,7 +24,7 @@
           <a class="nav-link" href="?page=timeline">Twingeline</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="?page=yours">Your Twinges</a>
+          <a class="nav-link" href="?page=personal">Your Twinges</a>
         </li>
 
         <li class="nav-item">
