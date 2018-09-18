@@ -44,11 +44,9 @@ function displayTweets($type) {
     case 'personal':
       $whereClause = "WHERE `user_id`={$_SESSION['id']}";
       break;
-}
+  }
   
-  echo "whereClause: '$whereClause'";
-
-  $query = 'SELECT * FROM `tweets` ' . $whereClause . ' ORDER BY `created_at` DESC LIMIT 10';
+  $query = "SELECT * FROM `tweets` $whereClause ORDER BY `created_at` DESC LIMIT 10";
   $result = mysqli_query($link, $query);
 
   if (mysqli_num_rows($result) === 0) {

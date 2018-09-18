@@ -20,14 +20,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <li class="nav-item" id="timeline">
           <a class="nav-link" href="?page=timeline">Twingeline</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="personal">
           <a class="nav-link" href="?page=personal">Your Twinges</a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" id="profiles">
           <a class="nav-link" href="?page=profiles">Public Profiles</a>
         </li>
       </ul>

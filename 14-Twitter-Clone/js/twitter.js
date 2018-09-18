@@ -9,7 +9,18 @@ const toggleFollows = [...document.querySelectorAll('.toggle-follow')];
 const newTwinge = document.getElementById('new-twinge');
 const newTwingeText = document.getElementById('new-twinge-text');
 
-// Set active on the active page
+// Set active in the nav for the active page
+window.onload = () => {
+  // Set all inactive initially
+  navItems.forEach(item => item.classList.remove('active'));
+
+  const parms = location.search;
+
+  if (parms !== '') {
+    const [parm, page] = parms.split('=');
+    document.getElementById(page).classList.add('active');
+  }
+};
 
 navItems.forEach(item =>
   item.addEventListener('click', e => {
