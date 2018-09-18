@@ -19,21 +19,24 @@ function displayTweets($type) {
 
   $whereClause = '';
 
-  if ($type === 'isFollowing') {
+  if ($type === 'following') {
     $query = "SELECT * FROM `following` WHERE `follower`={$_SESSION['id']}";
     $result = mysqli_query($link, $query);
-    
-    while($row = mysqli_fetch_object($result)) {
-      if ($whereClause === '') {
-        $whereClause = "WHERE `user_id` IN ({$row->following}";
-      } 
-      else {
-        $whereClause .= ", {$row->following}";
-      }
-    }
 
-    if ($whereClause !== '') {
+    if (mysqli_num_rows($result) > 0) {    
+      while($row = mysqli_fetch_object($result)) {
+        if ($whereClause === '') {
+          $whereClause = "WHERE `user_id` IN ({$row->following}";
+        } 
+        else {
+          $whereClause .= ", {$row->following}";
+        }
+      }
+
       $whereClause .= ')';
+    }
+    else {
+      $whereClause = 'WHERE 1=0';  // Always false, no follows
     }
   }
 
@@ -82,15 +85,15 @@ function displaySearch() {
 <?php
 }
 
-// Display a new tweet box
-function displayTweetBox() {
+// Display a new twinge box
+function displayTwingeBox() {
   if ($_SESSION['id']): ?>
     <form>
       <div class="form-group">
         <label for="new-tweet-text">Say something profound</label>
-        <textarea class="form-control" id="new-tweet-text" rows="3"></textarea>
+        <textarea class="form-control" id="new-twinge-text" rows="3"></textarea>
       </div>
-      <button type="button" class="btn btn-primary">Twinge</button>
+      <button id="new-twinge" type="button" class="btn btn-primary">Twinge</button>
     </form>
 <?php
   endif;
