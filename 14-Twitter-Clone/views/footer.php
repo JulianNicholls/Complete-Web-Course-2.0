@@ -1,6 +1,6 @@
   <footer class="footer">
     <div class="container">
-      &copy; Twitterings 2018
+      &copy; Twinge LLC 2018
     </div>
   </footer>
 

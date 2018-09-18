@@ -3,6 +3,13 @@
 
   require_once('views/header.php');
 
-  include('views/home.php');
+  switch ($_GET['page']) {
+    case 'timeline':
+      include('views/timeline.php');
+      break;
+
+    default:
+      include('views/home.php');
+  }
 
   require_once('views/footer.php');

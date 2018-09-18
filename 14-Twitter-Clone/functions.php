@@ -19,9 +19,23 @@ function displayTweets($type) {
 
   $whereClause = '';
 
-  // if ($type === 'public') {
-  //   $whereClause = '';
-  // }
+  if ($type === 'isFollowing') {
+    $query = "SELECT * FROM `following` WHERE `follower`={$_SESSION['id']}";
+    $result = mysqli_query($link, $query);
+    
+    while($row = mysqli_fetch_object($result)) {
+      if ($whereClause === '') {
+        $whereClause = "WHERE `user_id` IN ({$row->following}";
+      } 
+      else {
+        $whereClause .= ", {$row->following}";
+      }
+    }
+
+    if ($whereClause !== '') {
+      $whereClause .= ')';
+    }
+  }
 
   $query = 'SELECT * FROM `tweets` ' . $whereClause . ' ORDER BY `created_at` DESC LIMIT 10';
   $result = mysqli_query($link, $query);
@@ -31,14 +45,23 @@ function displayTweets($type) {
   }
   else {
     while ($row = mysqli_fetch_object($result)) {
-      $query = 'SELECT * FROM `users` WHERE `id`=' . $row->user_id;
-      $user_result = mysqli_query($link, $query);
-      $user = mysqli_fetch_object($user_result);
+      $query = "SELECT `email` FROM `users` WHERE `id`=$row->user_id";
+      $userResult = mysqli_query($link, $query);
+      $user = mysqli_fetch_object($userResult);
+      
+      $query = "SELECT * FROM `following` WHERE `follower`={$_SESSION['id']} AND `following`={$row->user_id}";
+      $followResult = mysqli_query($link, $query);
+      $following = mysqli_num_rows($followResult) !== 0;
 ?>
       <div class="tweet">
         <div class="tweet__content"><?php echo $row->tweet; ?></div>
-        <span class="tweet__email"><?php echo $user->email; ?></span>
-        <span class="tweet__time"><?php echo human_time(strtotime($row->created_at)) ?></span>
+        <div class="my-2 d-flex justify-content-between align-items-center">
+          <span class="tweet__time flex-grow-1"><?php echo human_time(strtotime($row->created_at)) ?></span>
+          <span class="tweet__email pr-3"><?php echo $user->email; ?></span>
+          <button class="toggle-follow btn btn-success btn-sm" data-user-id="<?php echo $row->user_id ?>">
+            <?php echo $following ? 'Unfollow' : 'Follow'; ?>
+          </button>
+        </div>
       </div>
 <?php
     }
