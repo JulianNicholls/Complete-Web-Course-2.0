@@ -2,26 +2,31 @@ const loginActive = document.getElementById('login-active');
 const title = document.getElementById('login-modal-label');
 const actionButton = document.getElementById('action-button');
 const toggleLogin = document.getElementById('toggle-login');
+
 const toggleFollows = document.querySelectorAll('.toggle-follow');
+
+const newTwinge = document.getElementById('new-twinge');
+const newTwingeText = document.getElementById('new-twinge-text');
 
 // Switch between login and signup
 toggleLogin.addEventListener('click', e => {
   e.preventDefault();
 
+  const suText = 'Sign up';
+  const liText = 'Log in';
+
   if (loginActive.value === '1') {
-    console.log('login -> signup');
     loginActive.value = '0';
 
-    title.innerText = 'Sign up';
-    actionButton.innerText = 'Sign up';
-    toggleLogin.innerText = 'Log in';
+    title.innerText = suText;
+    actionButton.innerText = suText;
+    toggleLogin.innerText = liText;
   } else {
-    console.log('signup -> login');
     loginActive.value = '1';
 
-    title.innerText = 'Log in';
-    actionButton.innerText = 'Log in';
-    toggleLogin.innerText = 'Sign up';
+    title.innerText = liText;
+    actionButton.innerText = liText;
+    toggleLogin.innerText = suText;
   }
 });
 
@@ -42,8 +47,6 @@ actionButton.addEventListener('click', async () => {
 
   const data = await response.json();
 
-  console.log(data);
-
   if (data.errors.length === 0) {
     window.location.assign('/');
   } else {
@@ -55,6 +58,7 @@ actionButton.addEventListener('click', async () => {
   }
 });
 
+// Toggle whether the logged in user is following the tweet author
 [...toggleFollows].forEach(tf => tf.addEventListener('click', toggleFollow));
 
 async function toggleFollow(e) {
@@ -71,9 +75,25 @@ async function toggleFollow(e) {
     `button[data-user-id="${userId}"]`
   );
 
-  console.log({ data, linksForUser });
-
   [...linksForUser].forEach(
     link => (link.innerText = data.following ? 'Unfollow' : 'Follow')
   );
 }
+
+newTwingeText.addEventListener('input', () => {
+  newTwinge.disabled = newTwingeText.value === '';
+});
+
+// Post a new twinge
+newTwinge.addEventListener('click', async () => {
+  console.log('Send:', newTwingeText.value);
+  const response = await fetch('/actions.php?action=newTwinge', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: newTwingeText.value })
+  });
+
+  const data = await response.json();
+
+  window.location.reload(true);
+});

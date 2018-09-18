@@ -43,7 +43,7 @@ if ($_GET['action'] === 'toggleFollow') {
   if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_object($result);
 
-    $query = "DELETE FROM `following` WHERE ID=$row->id LIMIT 1";
+    $query = "DELETE FROM `following` WHERE `id`=$row->id LIMIT 1";
     mysqli_query($link, $query);
 
     echo '{ "following": false }';
@@ -56,60 +56,11 @@ if ($_GET['action'] === 'toggleFollow') {
   }
 }
 
-// Sign up
-function signup($loginData) {
-  global $link;
+if ($_GET['action'] === 'newTwinge') {
+  $twingeData = getPOSTData();
 
-  $response = [ 'errors' => [] ];
+  $query = "INSERT INTO `tweets` (`tweet`, `user_id`) VALUES ('$twingeData->text', {$_SESSION['id']})";
+  mysqli_query($link, $query);
 
-  $query = "SELECT * FROM `users` WHERE `email`='" . mysqli_real_escape_string($link, $loginData->email) . "' LIMIT 1";
-  $result = mysqli_query($link, $query);
-  
-  if (mysqli_num_rows($result) > 0) {
-    $response['errors'][] = 'That email address has already been signed up.';
-    return $response;
-  }
-  else {
-    $query = "INSERT INTO `users` (`email`, `password`) VALUES ('" . 
-      mysqli_real_escape_string($link, $loginData->email) . 
-      "', '" . 
-      password_hash(mysqli_real_escape_string($link, $loginData->password), PASSWORD_DEFAULT) . 
-      "')";
-
-    if (mysqli_query($link, $query)) {
-      $_SESSION['id'] = mysqli_insert_id($link);
-    }
-    else {
-      $response['errors'][] = mysqli_error($link);
-    }
-  }
-
-  return $response;
-}
-
-// Login
-function login($loginData) {
-  global $link;
-
-  $response = [ 'errors' => [] ];
-
-  $login_error = 'The email or password was not recognised.';
-  $query = "SELECT * FROM `users` WHERE `email`='" . mysqli_real_escape_string($link, $loginData->email) . "' LIMIT 1";
-  $result = mysqli_query($link, $query);
-  
-  if (mysqli_num_rows($result) === 1) {
-    $row = mysqli_fetch_object($result);
-    
-    if (password_verify($loginData->password, $row->password)) {
-      $_SESSION['id'] = $row->id;
-    }
-    else {
-      $response['errors'][] = $login_error;
-    }
-  }
-  else {
-    $response['errors'][] = $login_error;
-  }
-
-  return $response;
+  echo '{ "ok": true }';
 }

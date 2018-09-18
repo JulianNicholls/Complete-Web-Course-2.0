@@ -93,10 +93,68 @@ function displayTwingeBox() {
         <label for="new-tweet-text">Say something profound</label>
         <textarea class="form-control" id="new-twinge-text" rows="3"></textarea>
       </div>
-      <button id="new-twinge" type="button" class="btn btn-primary">Twinge</button>
+      <button id="new-twinge" type="button" class="btn btn-primary" disabled>Twinge</button>
     </form>
 <?php
   endif;
+}
+
+// Sign up
+function signup($loginData) {
+  global $link;
+
+  $response = [ 'errors' => [] ];
+
+  $query = "SELECT * FROM `users` WHERE `email`='" . mysqli_real_escape_string($link, $loginData->email) . "' LIMIT 1";
+  $result = mysqli_query($link, $query);
+  
+  if (mysqli_num_rows($result) > 0) {
+    $response['errors'][] = 'That email address has already been signed up.';
+    return $response;
+  }
+  else {
+    $query = "INSERT INTO `users` (`email`, `password`) VALUES ('" . 
+      mysqli_real_escape_string($link, $loginData->email) . 
+      "', '" . 
+      password_hash(mysqli_real_escape_string($link, $loginData->password), PASSWORD_DEFAULT) . 
+      "')";
+
+    if (mysqli_query($link, $query)) {
+      $_SESSION['id'] = mysqli_insert_id($link);
+    }
+    else {
+      $response['errors'][] = mysqli_error($link);
+    }
+  }
+
+  return $response;
+}
+
+// Log in
+function login($loginData) {
+  global $link;
+
+  $response = [ 'errors' => [] ];
+
+  $loginError = 'The email or password was not recognised.';
+  $query = "SELECT * FROM `users` WHERE `email`='" . mysqli_real_escape_string($link, $loginData->email) . "' LIMIT 1";
+  $result = mysqli_query($link, $query);
+  
+  if (mysqli_num_rows($result) === 1) {
+    $row = mysqli_fetch_object($result);
+    
+    if (password_verify($loginData->password, $row->password)) {
+      $_SESSION['id'] = $row->id;
+    }
+    else {
+      $response['errors'][] = $loginError;
+    }
+  }
+  else {
+    $response['errors'][] = $loginError;
+  }
+
+  return $response;
 }
 
 // Load the sent data that was POSTed as JSON.
