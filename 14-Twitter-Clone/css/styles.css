@@ -1,12 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   position: relative;
   min-height: 100%
 }
 
-bosy {
-  margin-bottom: 40px;
+body {
+  background: linear-gradient(to bottom, #f0f0ff, #c8c8ff);
   color: #222;
+  font-family: 'Cabin', sans-serif;
+  margin-bottom: 40px;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'BioRhyme', serif;
+} 
 
 .footer {
   background: #ddd;
@@ -25,6 +35,10 @@ bosy {
   border-radius: 0.25em;
   padding: 0.5em;
   margin: 0.5em;
+}
+
+.tweet__content {
+  white-space: pre-wrap;
 }
 
 .tweet__email, .tweet__time {

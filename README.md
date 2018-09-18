@@ -11,7 +11,9 @@ Working on section 14 - Twitter Clone.
 
 I have probably skipped large sections, notably the Twitter API lectures because I couldn't be bothered to wait for the apparently lengthy approval process to become a Twitter deveoper now.
 
-I am not using jQuery in the Twitter Clone, it is still loaded though, because parts of Bootstrap require it.
+I am not using jQuery in the Twitter Clone, it is still loaded though, because 
+parts of Bootstrap require it. I am using `fetch()` instead of the jQuery 
+`$.ajax()` and sending and receiving passed data as JSON.
 
 ## Git client
 
