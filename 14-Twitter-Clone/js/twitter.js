@@ -14,11 +14,20 @@ window.onload = () => {
   // Set all inactive initially
   navItems.forEach(item => item.classList.remove('active'));
 
-  const parms = location.search;
+  const parmsStr = location.search;
 
-  if (parms !== '') {
-    const [parm, page] = parms.split('=');
-    document.getElementById(page).classList.add('active');
+  if (parmsStr !== '') {
+    const parms = parmsStr.substr(1).split('&');
+
+    parms.forEach(parm => {
+      const [arg, value] = parm.split('=');
+
+      if (arg === 'page') {
+        const navItem = document.getElementById(value);
+
+        if (navItem) navItem.classList.add('active');
+      }
+    });
   }
 };
 
@@ -102,20 +111,22 @@ async function toggleFollow(e) {
   );
 }
 
-newTwingeText.addEventListener('input', () => {
-  newTwinge.disabled = newTwingeText.value === '';
-});
-
-// Post a new twinge
-newTwinge.addEventListener('click', async () => {
-  console.log('Send:', newTwingeText.value);
-  const response = await fetch('/actions.php?action=newTwinge', {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text: newTwingeText.value })
+if (newTwinge) {
+  newTwingeText.addEventListener('input', () => {
+    newTwinge.disabled = newTwingeText.value === '';
   });
 
-  const data = await response.json();
+  // Post a new twinge
+  newTwinge.addEventListener('click', async () => {
+    console.log('Send:', newTwingeText.value);
+    const response = await fetch('/actions.php?action=newTwinge', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: newTwingeText.value })
+    });
 
-  window.location.reload(true);
-});
+    const data = await response.json();
+
+    window.location.reload(true);
+  });
+}

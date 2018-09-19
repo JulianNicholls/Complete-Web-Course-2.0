@@ -47,7 +47,7 @@ function displayTweets($type) {
 
     case 'search':
       $searchTerm = mysqli_real_escape_string($link, $_GET['q']);
-      echo "<h3>Showing results for $searchTerm</h3>";
+      echo "<h3 class=\"text-center\">Showing results for $searchTerm</h3>";
       $whereClause = "WHERE `tweet` LIKE '%$searchTerm%'";
       break;
   }
@@ -56,7 +56,7 @@ function displayTweets($type) {
   $result = mysqli_query($link, $query);
 
   if (mysqli_num_rows($result) === 0) {
-    echo 'There are no tweets to display';
+    echo '<p class="lead text-center">There are no tweets to display';
   }
   else {
     while ($row = mysqli_fetch_object($result)) {
