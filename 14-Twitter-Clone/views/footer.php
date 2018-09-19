@@ -1,6 +1,6 @@
   <footer class="footer">
     <div class="container">
-      &copy; Twinge LLC 2018
+      &copy; Twinger LLC 2018
     </div>
   </footer>
 

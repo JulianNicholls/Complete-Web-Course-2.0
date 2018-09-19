@@ -7,6 +7,7 @@
     case 'timeline':
     case 'personal':
     case 'search':
+    case 'profiles':
       include("views/{$_GET['page']}.php");
       break;
 

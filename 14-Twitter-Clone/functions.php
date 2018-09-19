@@ -17,41 +17,8 @@ if(mysqli_connect_errno()) {
 function displayTweets($type) {
   global $link;
 
-  $whereClause = '';
+  $whereClause = prepareWhereClause($type);
 
-  switch ($type) {
-    case 'following':
-      $query = "SELECT * FROM `following` WHERE `follower`={$_SESSION['id']}";
-      $result = mysqli_query($link, $query);
-    
-      if (mysqli_num_rows($result) > 0) {    
-        while($row = mysqli_fetch_object($result)) {
-          if ($whereClause === '') {
-            $whereClause = "WHERE `user_id` IN ({$row->following}";
-          } 
-          else {
-            $whereClause .= ", {$row->following}";
-          }
-        }
-    
-        $whereClause .= ')';
-      }
-      else {
-        $whereClause = 'WHERE 1=0';  // Always false, no follows
-      }
-      break;
-
-    case 'personal':
-      $whereClause = "WHERE `user_id`={$_SESSION['id']}";
-      break;
-
-    case 'search':
-      $searchTerm = mysqli_real_escape_string($link, $_GET['q']);
-      echo "<h3 class=\"text-center\">Showing results for $searchTerm</h3>";
-      $whereClause = "WHERE `tweet` LIKE '%$searchTerm%'";
-      break;
-  }
-  
   $query = "SELECT * FROM `tweets` $whereClause ORDER BY `created_at` DESC LIMIT 10";
   $result = mysqli_query($link, $query);
 
@@ -112,13 +79,29 @@ function displayTwingeBox() {
   endif;
 }
 
+// Display all the users
+function displayUsers() {
+  global $link;
+
+  $query = 'SELECT `id`, `email` FROM `users`';
+  $result = mysqli_query($link, $query);
+
+  echo '<ul class="list-group">';
+
+  while($user = mysqli_fetch_object($result)) {
+    echo "<li class=\"list-group-item\"><a href=\"?page=profiles&userid=$user->id\">$user->email</a></li>";
+  }
+
+  echo '</ul>';
+}
+
 // Sign up
 function signup($loginData) {
   global $link;
 
   $response = [ 'errors' => [] ];
 
-  $query = "SELECT * FROM `users` WHERE `email`='" . mysqli_real_escape_string($link, $loginData->email) . "' LIMIT 1";
+  $query = "SELECT `email` FROM `users` WHERE `email`='" . mysqli_real_escape_string($link, $loginData->email) . "' LIMIT 1";
   $result = mysqli_query($link, $query);
   
   if (mysqli_num_rows($result) > 0) {
@@ -129,7 +112,7 @@ function signup($loginData) {
     $query = "INSERT INTO `users` (`email`, `password`) VALUES ('" . 
       mysqli_real_escape_string($link, $loginData->email) . 
       "', '" . 
-      password_hash(mysqli_real_escape_string($link, $loginData->password), PASSWORD_DEFAULT) . 
+      password_hash($loginData->password, PASSWORD_DEFAULT) . 
       "')";
 
     if (mysqli_query($link, $query)) {
@@ -173,4 +156,57 @@ function login($loginData) {
 // Load the sent data that was POSTed as JSON.
 function getPOSTData() {
   return json_decode(file_get_contents('php://input'));
+}
+
+// Prepare the WHERE clause based on the display type
+function prepareWhereClause($type) {
+  global $link;
+
+  $whereClause = '';
+
+  switch ($type) {
+    case 'following':
+      $query = "SELECT `following` FROM `following` WHERE `follower`={$_SESSION['id']}";
+      $result = mysqli_query($link, $query);
+    
+      if (mysqli_num_rows($result) > 0) {    
+        while($row = mysqli_fetch_object($result)) {
+          if ($whereClause === '') {
+            $whereClause = "WHERE `user_id` IN ({$row->following}";
+          } 
+          else {
+            $whereClause .= ", {$row->following}";
+          }
+        }
+    
+        $whereClause .= ')';
+      }
+      else {
+        $whereClause = 'WHERE 1=0';  // Always false, no follows
+      }
+      break;
+
+    case 'personal':
+      $whereClause = "WHERE `user_id`={$_SESSION['id']}";
+      break;
+      
+    case 'search':
+      $searchTerm = mysqli_real_escape_string($link, $_GET['q']);
+      echo "<h3 class=\"text-center\">Showing results for $searchTerm</h3>";
+      $whereClause = "WHERE `tweet` LIKE '%$searchTerm%'";
+      break;
+      
+    default:
+      if (is_numeric($type)) {
+        $query = "SELECT `email` FROM `users` WHERE `id`=$type";
+        $result = mysqli_query($link, $query);
+        $user = mysqli_fetch_object($result);
+
+        echo "<h3 class=\"text-center\">$user->email twinges</h3>";
+        $whereClause = "WHERE `user_id`=$type";
+      }
+      break;
+  }
+
+  return $whereClause;
 }
