@@ -87,13 +87,18 @@ function displayTwingeBox() {
 function displayUsers() {
   global $link;
 
-  $query = 'SELECT `id`, `email` FROM `users`';
+  $query = "SELECT u.id, u.email, COUNT(t.user_id) AS twinge_count FROM users u LEFT JOIN tweets t ON u.id = t.user_id GROUP BY u.id";
   $result = mysqli_query($link, $query);
 
   echo '<ul class="list-group">';
 
   while($user = mysqli_fetch_object($result)) {
-    echo "<li class=\"list-group-item\"><a href=\"?page=profiles&userid=$user->id\">$user->email</a></li>";
+    echo '<li class="list-group-item d-flex justify-content-between">';
+    echo   "<a href=\"?page=profiles&userid=$user->id\">";
+    echo     $user->email . '</a>';
+    echo   "<a href=\"?page=profiles&userid=$user->id\">";
+    echo     $user->twinge_count . ' twinges</a>';
+    echo '</li>';
   }
 
   echo '</ul>';
