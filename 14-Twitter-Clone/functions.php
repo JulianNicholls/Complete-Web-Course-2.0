@@ -27,7 +27,7 @@ function displayTweets($type) {
   }
   else {
     while ($row = mysqli_fetch_object($result)) {
-      $query = "SELECT `email` FROM `users` WHERE `id`=$row->user_id";
+      $query = "SELECT `id`, `email` FROM `users` WHERE `id`=$row->user_id";
       $userResult = mysqli_query($link, $query);
       $user = mysqli_fetch_object($userResult);
       
@@ -39,7 +39,11 @@ function displayTweets($type) {
         <div class="tweet__content"><?php echo $row->tweet; ?></div>
         <div class="my-2 d-flex justify-content-between align-items-center">
           <span class="tweet__time flex-grow-1"><?php echo human_time(strtotime($row->created_at)) ?></span>
-          <span class="tweet__email pr-3"><?php echo $user->email; ?></span>
+          <span class="tweet__email pr-3">
+            <a href="<?php echo "?page=profiles&userid={$user->id}"; ?>">
+              <?php echo $user->email; ?>
+            </a>
+          </span>
           <button class="toggle-follow btn btn-success btn-sm" data-user-id="<?php echo $row->user_id ?>">
             <?php echo $following ? 'Unfollow' : 'Follow'; ?>
           </button>
