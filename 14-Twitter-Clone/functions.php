@@ -44,6 +44,12 @@ function displayTweets($type) {
     case 'personal':
       $whereClause = "WHERE `user_id`={$_SESSION['id']}";
       break;
+
+    case 'search':
+      $searchTerm = mysqli_real_escape_string($link, $_GET['q']);
+      echo "<h3>Showing results for $searchTerm</h3>";
+      $whereClause = "WHERE `tweet` LIKE '%$searchTerm%'";
+      break;
   }
   
   $query = "SELECT * FROM `tweets` $whereClause ORDER BY `created_at` DESC LIMIT 10";
@@ -80,14 +86,15 @@ function displayTweets($type) {
 // Display a search form
 function displaySearch() {
 ?>
-  <div class="form-row align-items-center mb-5">
+  <form class="form-row align-items-center mb-5">
     <div class="col-sm-9">
-      <input type="text" class="form-control" id="search" placeholder="Search">
+      <input type="hidden" name="page" value="search">
+      <input type="text" class="form-control" id="search" name="q" placeholder="Search">
     </div>
     <div class="col-sm-3">
       <button class="btn btn-primary">Search</button>
     </div>
-  </div>
+  </form>
 <?php
 }
 

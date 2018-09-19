@@ -5,11 +5,9 @@
 
   switch ($_GET['page']) {
     case 'timeline':
-      include('views/timeline.php');
-      break;
-
     case 'personal':
-      include('views/personal.php');
+    case 'search':
+      include("views/{$_GET['page']}.php");
       break;
 
     default:
